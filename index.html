@@ -131,23 +131,71 @@ document.addEventListener("DOMContentLoaded", () => {
             <h4>Carga moderada / alta</h4>
             <p>Descanso: 45–60 seg.</p>
             <table>
-                <thead>
-                    <tr>
-                        <th>Exercício</th>
-                        <th>Séries</th>
-                        <th>Rep.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Puxada aberta na polia</td><td>4</td><td>8-10</td></tr>
-                    <tr><td>Remada unilateral com halter</td><td>4</td><td>8-10 cada lado</td></tr>
-                    <tr><td>Remada baixa na polia</td><td>3</td><td>10-12</td></tr>
-                    <tr><td>Face pull no cabo com corda</td><td>3</td><td>12-15</td></tr>
-                    <tr><td>Supino fechado (barra ou smith)</td><td>4</td><td>8-10</td></tr>
-                    <tr><td>Tríceps testa (barra W ou halteres)</td><td>3</td><td>10-12</td></tr>
-                    <tr><td>Tríceps corda no cabo</td><td>3</td><td>12-15</td></tr>
-                </tbody>
-            </table>
+  <thead>
+    <tr>
+      <th>Check-in</th>
+      <th>Exercício</th>
+      <th>Séries</th>
+      <th>Rep.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Puxada aberta na polia</td>
+      <td>4</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Remada unilateral com halter</td>
+      <td>4</td>
+      <td>8-10 cada lado</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Remada baixa na polia</td>
+      <td>3</td>
+      <td>10-12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Face pull no cabo com corda</td>
+      <td>3</td>
+      <td>12-15</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Supino fechado (barra ou smith)</td>
+      <td>4</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Tríceps testa (barra W ou halteres)</td>
+      <td>3</td>
+      <td>10-12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Tríceps corda no cabo</td>
+      <td>3</td>
+      <td>12-15</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".checkin").forEach((checkbox, index) => {
+    const key = "checkin_" + index;
+    checkbox.checked = localStorage.getItem(key) === "true";
+    checkbox.addEventListener("change", function() {
+      localStorage.setItem(key, this.checked);
+    });
+  });
+});
+</script>
           </div>
         </li>
        <li>
@@ -262,6 +310,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <script src="./script.js"></script>
   </body>
 </html>
+
 
 
 
