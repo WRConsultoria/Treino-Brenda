@@ -33,23 +33,71 @@
             <h4>Carga moderada / alta</h4>
             <p>Descanso: 45–60 seg.</p>
             <table>
-                <thead>
-                    <tr>
-                        <th>Exercício</th>
-                        <th>Séries</th>
-                        <th>Rep.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                  <tr><td>Supino inclinado com barra</td><td>4</td><td>6-8</td></tr>
-                  <tr><td>Supino inclinado com halteres</td><td>4</td><td>8-10</td></tr>
-                  <tr><td>Crucifixo inclinado (halteres ou cabos)</td><td>3</td><td>10-12</td></tr>
-                  <tr><td>Crossover no cabo (baixo → cima)</td><td>3</td><td>12-15</td></tr>
-                  <tr><td>Rosca direta (barra W ou reta)</td><td>4</td><td>8-10</td></tr>
-                  <tr><td>Rosca inclinada com halteres</td><td>3</td><td>10-12</td></tr>
-                  <tr><td>Rosca martelo</td><td>3</td><td>12</td></tr>
-                </tbody>
-            </table>
+  <thead>
+    <tr>
+      <th>Check-in</th>
+      <th>Exercício</th>
+      <th>Séries</th>
+      <th>Rep.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Supino inclinado com barra</td>
+      <td>4</td>
+      <td>6-8</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Supino inclinado com halteres</td>
+      <td>4</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Crucifixo inclinado (halteres ou cabos)</td>
+      <td>3</td>
+      <td>10-12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Crossover no cabo (baixo → cima)</td>
+      <td>3</td>
+      <td>12-15</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Rosca direta (barra W ou reta)</td>
+      <td>4</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Rosca inclinada com halteres</td>
+      <td>3</td>
+      <td>10-12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Rosca martelo</td>
+      <td>3</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".checkin").forEach((checkbox, index) => {
+    const key = "checkin_" + index;
+    checkbox.checked = localStorage.getItem(key) === "true";
+    checkbox.addEventListener("change", function() {
+      localStorage.setItem(key, this.checked);
+    });
+  });
+});
+</script>
           </div>
         </li>
         <li>
@@ -214,6 +262,7 @@
     <script src="./script.js"></script>
   </body>
 </html>
+
 
 
 
