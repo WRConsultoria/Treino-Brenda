@@ -230,53 +230,89 @@ document.addEventListener("DOMContentLoaded", () => {
          <h4>Carga moderada / alta</h4>
          <p>Descanso: 60 seg.</p>
          <table>
-            <thead>
-                <tr>
-                  <th>Exercício</th>
-                  <th>Séries</th>
-                  <th>Rep.</th>
-                </tr>
-            </thead>
-            <tbody>
-                    <tr><td>Agachamento livre com barra</td><td>4</td><td>8-10</td></tr>
-                    <tr><td>Leg press</td><td>4</td><td>10</td></tr>
-                    <tr><td>Avanço (lunge) com halteres</td><td>3</td><td>10 cada perna</td></tr>
-                    <tr><td>Cadeira extensora (drop set)</td><td>3</td><td>15+10+8</td></tr>
-                    <tr><td>Cadeira flexora</td><td>4</td><td>10</td></tr>
-                    <tr><td>Elevação pélvica (isometria 10-20s)</td><td>4</td><td>12</td></tr>
-                    <tr><td>Cadeira abdutora</td><td>4</td><td>12</td></tr>
-                    <tr><td>Desenvolvimento militar</td><td>3</td><td>8-10</td></tr>
-                    <tr><td>Elevação lateral</td><td>3</td><td>12</td></tr>
-                    <tr><td>Crucifixo inverso</td><td>3</td><td>12</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </li>
-        <li>
-          <button class="btn-toggle-content" data-target="sabadoAcademiaContent">Sábado / Domingo</button>
-          <div id="sabadoAcademiaContent" class="hidden-content">
-            <h4>Full body + cárdio</h4>
-            <p>Descanso entre as séries: 30s à 40s</p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Academia</th>
-                        <th>Séries</th>
-                        <th>Rep.</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr><td>Leg press máquina</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Elevação Pélvica</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Cadeira Flexora</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Supino reto máquina</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Remada fechada na máquina</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Pull down</a></td><td>3</td><td>12</td></tr>
-                    <tr><td>Rosca 21</a></td><td>3</td><td>21</td></tr>
-                    <tr><td>Triceps no smith com corda</a></td><td>3</td><td>12</td></tr>
-                </tbody>
-            </table>
-               <p>Cárdio final: 30 minutos</p>
+  <thead>
+    <tr>
+      <th>Check-in</th>
+      <th>Exercício</th>
+      <th>Séries</th>
+      <th>Rep.</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Agachamento livre com barra</td>
+      <td>4</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Leg press</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Avanço (lunge) com halteres</td>
+      <td>3</td>
+      <td>10 cada perna</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Cadeira extensora (drop set)</td>
+      <td>3</td>
+      <td>15+10+8</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Cadeira flexora</td>
+      <td>4</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Elevação pélvica (isometria 10-20s)</td>
+      <td>4</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Cadeira abdutora</td>
+      <td>4</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Desenvolvimento militar</td>
+      <td>3</td>
+      <td>8-10</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Elevação lateral</td>
+      <td>3</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <td><input type="checkbox" class="checkin"></td>
+      <td>Crucifixo inverso</td>
+      <td>3</td>
+      <td>12</td>
+    </tr>
+  </tbody>
+</table>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".checkin").forEach((checkbox, index) => {
+    const key = "checkin_" + index;
+    checkbox.checked = localStorage.getItem(key) === "true";
+    checkbox.addEventListener("change", function() {
+      localStorage.setItem(key, this.checked);
+    });
+  });
+});
+</script>
           </div>
         </li>
       
@@ -310,6 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <script src="./script.js"></script>
   </body>
 </html>
+
 
 
 
