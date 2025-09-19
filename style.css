@@ -76,14 +76,14 @@ body.main-page ul {
   flex-direction: column;
   gap: 16px;
   padding: 24px 0;
-  --text-color: rgb(0, 0, 0)  ; /* Cor do texto do perfil */
+  --text-color: rgb(0, 0, 0); /* Cor do texto do perfil */
 }
 
 body.main-page ul li a {
   text-decoration: none;
   font-weight: 500;
   transition: background 0.2s, border-color 0.2s;
-  --text-color: rgb(0, 0, 0)  ; /* Cor do texto do perfil */
+  --text-color: rgb(0, 0, 0); /* Cor do texto do perfil */
 }
 
 body.main-page ul li a:hover {
@@ -106,7 +106,7 @@ body.main-page ul li a:hover {
     backdrop-filter: blur(4px); /* Efeito de blur consistente */
     -webkit-backdrop-filter: blur(4px);
     font-weight: 500; /* Peso da fonte consistente */
-    --text-color: rgb(0, 0, 0)  ; /* Cor do texto do perfil */
+    --text-color: rgb(0, 0, 0); /* Cor do texto do perfil */
 }
 
 .btn-toggle-content:hover {
@@ -169,7 +169,8 @@ body.main-page ul li a:hover {
 
 /* Estilos para o cabeçalho da tabela dentro da área de conteúdo */
 .hidden-content th {
-    border: 1px solid rgba(0, 0, 0, 0.2); /* Borda da tabela mais suave, agora escura */
+    /* MANTÉM A BORDA DA CÉLULA DO CABEÇALHO, MAS A BORDA DA TABELA ESTÁ TRANSPARENTE */
+    border: 1px solid transparent; 
     padding: 6px;
     text-align: center;
     color: #333333; /* Texto preto para o cabeçalho da tabela */
@@ -180,13 +181,18 @@ body.main-page ul li a:hover {
 
 /* Estilos para as células da tabela dentro da área de conteúdo */
 .hidden-content td {
-    border: 1px solid rgba(0, 0, 0, 0.2); /* Borda da tabela mais suave, agora escura */
+    /* APLICA BORDA TRANSPARENTE */
+    border: 1px solid transparent;
     padding: 5px;
     text-align: left;
     color: #333333; /* Texto preto para as células da tabela */
     font-size: 0.8rem; /* Tamanho de fonte menor para melhor legibilidade */
 }
 
+/* NOVO: Estilo para centralizar o conteúdo da coluna "Done" */
+.done-column {
+    text-align: center;
+}
 
 /* Estilos dos links sociais na página principal */
 body.main-page #social-links {
