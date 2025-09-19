@@ -230,28 +230,7 @@ body.main-page footer a {
   color: var(--text-color);
   text-decoration: none;
   font-weight: 500;
-}  align-items: center;
-  overflow-y: auto; /* Permite rolagem do corpo se o conteúdo exceder */
-  font-size: 18px; /* Tamanho de fonte padrão para a página principal */
-}
-
-body.main-page #container {
-  width: 100%;
-  max-width: 588px; /* Largura para a página principal */
-  margin: 56px auto 0px; /* Margem superior, centralizado horizontalmente */
-  padding: 0 24px; /* Padding nas laterais */
-  height: auto; /* Altura automática para a página principal */
-  display: block; /* Remove flexbox para permitir fluxo normal */
-}
-
-body.main-page #profile {
-  text-align: center;
-  padding: 24px;
-}
-
-body.main-page #profile img {
-  width: 134.4px;
-  height: auto;
+}  height: auto;
   display: block;
   margin: auto;
 }
@@ -427,4 +406,3 @@ body.main-page footer a {
   text-decoration: none;
   font-weight: 500;
 }
-
