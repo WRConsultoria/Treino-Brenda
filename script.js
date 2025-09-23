@@ -1,54 +1,106 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Script.js carregado e DOM content loaded.'); // Mensagem de depuração
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("Script.js carregado e DOM content loaded.");
 
-    // Seleciona todos os botões com a classe 'btn-toggle-content'
-    const toggleButtons = document.querySelectorAll('.btn-toggle-content');
+  const LAST_RESET_KEY = "last_checkin_reset_date";
+
+  // --- Funções de Lógica Principal ---
+
+  /**
+   * Configura os event listeners para os botões de alternância.
+   * Quando um botão é clicado, ele exibe ou esconde o conteúdo correspondente,
+   * enquanto esconde qualquer outro conteúdo que esteja visível.
+   */
+  function setupContentToggle() {
+    const toggleButtons = document.querySelectorAll(".btn-toggle-content");
 
     if (toggleButtons.length === 0) {
-        console.warn('Nenhum botão com a classe "btn-toggle-content" encontrado.'); // Aviso se nenhum botão for encontrado
+      console.warn('Nenhum botão com a classe "btn-toggle-content" encontrado.');
     } else {
-        console.log(`Encontrados ${toggleButtons.length} botões de alternância.`);
+      console.log(`Encontrados ${toggleButtons.length} botões de alternância.`);
     }
 
-    // Itera sobre cada botão e adiciona um event listener
-    toggleButtons.forEach(button => {
-        // Armazena o texto original do botão para referência futura, se necessário
-        // const originalButtonText = button.textContent;
+    toggleButtons.forEach((button) => {
+      button.addEventListener("click", function() {
+        const targetId = this.dataset.target;
+        const targetContent = document.getElementById(targetId);
 
-        button.addEventListener('click', function() {
-            console.log('Botão clicado:', this.textContent); // Mensagem de depuração ao clicar
-
-            // Obtém o ID da área de conteúdo alvo a partir do atributo 'data-target' do botão
-            const targetId = this.dataset.target;
-            const contentArea = document.getElementById(targetId);
-
-            // Verifica se a área de conteúdo existe
-            if (contentArea) {
-                // Alterna a classe 'show-content' na área de conteúdo
-                contentArea.classList.toggle('show-content');
-                console.log(`Conteúdo '${targetId}' visibilidade alternada. Agora tem 'show-content': ${contentArea.classList.contains('show-content')}`);
-
-                // --- Lógica removida: Não altera mais o texto do botão ---
-                // if (contentArea.classList.contains('show-content')) {
-                //     this.textContent = `Esconder ${originalButtonText}`;
-                // } else {
-                //     this.textContent = `Ver ${originalButtonText}`;
-                // }
-
-                // Opcional: Esconder outras áreas de conteúdo se estiverem abertas
-                // Isso garante que apenas uma seção de treino esteja visível por vez
-                document.querySelectorAll('.hidden-content.show-content').forEach(openContent => {
-                    if (openContent.id !== targetId) {
-                        openContent.classList.remove('show-content');
-                        console.log(`Conteúdo '${openContent.id}' escondido.`);
-                        // Não é necessário alterar o texto do botão correspondente aqui,
-                        // pois o texto do botão principal não muda mais.
-                    }
-                });
-
-            } else {
-                console.error(`Área de conteúdo com ID '${targetId}' não encontrada. Verifique o HTML.`);
+        if (targetContent) {
+          // Itera sobre todos os conteúdos visíveis e os esconde,
+          // exceto o que está sendo clicado.
+          document.querySelectorAll(".hidden-content.show-content").forEach((openContent) => {
+            if (openContent.id !== targetId) {
+              openContent.classList.remove("show-content");
             }
-        });
+          });
+
+          // Alterna a visibilidade da área de conteúdo alvo
+          targetContent.classList.toggle("show-content");
+          console.log(`Conteúdo '${targetId}' visibilidade alternada.`);
+        } else {
+          console.error(`Área de conteúdo com ID '${targetId}' não encontrada. Verifique o HTML.`);
+        }
+      });
     });
+  }
+
+  /**
+   * Reseta o estado de todos os checkboxes e remove os dados do localStorage.
+   */
+  function resetCheckins() {
+    document.querySelectorAll(".checkin").forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    // Limpa apenas os itens de check-in do localStorage, mantendo outros dados
+    for (let i = localStorage.length - 1; i >= 0; i--) {
+      const key = localStorage.key(i);
+      if (key.startsWith("checkin_")) {
+        localStorage.removeItem(key);
+      }
+    }
+    console.log("Todos os check-ins foram resetados!");
+
+    // Salva a data do último reset para evitar repetições
+    localStorage.setItem(LAST_RESET_KEY, new Date().toISOString().split("T")[0]);
+  }
+
+  /**
+   * Verifica a data e hora atuais para determinar se um reset deve ser executado.
+   * O reset ocorre apenas em domingos (dia 0) às 22h, uma vez por dia.
+   */
+  function checkAndReset() {
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // Domingo é 0
+    const hour = now.getHours(); // A hora atual
+
+    const lastResetDate = localStorage.getItem(LAST_RESET_KEY);
+    const today = now.toISOString().split("T")[0]; // Data atual no formato YYYY-MM-DD
+
+    // Condição: é domingo? é 22h? o reset ainda não foi feito hoje?
+    if (dayOfWeek === 0 && hour === 22 && lastResetDate !== today) {
+      resetCheckins();
+    }
+  }
+
+  /**
+   * Carrega o estado salvo dos checkboxes do localStorage e adiciona os event listeners
+   * para salvar as alterações.
+   */
+  function setupCheckinLogic() {
+    document.querySelectorAll("table").forEach((table, tIndex) => {
+      table.querySelectorAll(".checkin").forEach((checkbox, iIndex) => {
+        const key = `checkin_${tIndex}_${iIndex}`;
+        checkbox.checked = localStorage.getItem(key) === "true";
+        checkbox.addEventListener("change", function() {
+          localStorage.setItem(key, this.checked);
+        });
+      });
+    });
+    console.log("Lógica de check-in configurada e estados carregados.");
+  }
+
+  // --- Execução das Funções ---
+  setupContentToggle();
+  setupCheckinLogic();
+  checkAndReset();
 });
