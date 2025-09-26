@@ -202,26 +202,9 @@
       <td><div class="video-wrapper"><iframe src="https://youtube.com/embed/iEajLogB6hw?si=xYY3KrcrHSKcgTcC" allowfullscreen></iframe></div></td><td colspan="2" style="text-align:center;"><b>Russian twist</b></td></tr>
   </tbody>
 </table>
-         </div>
+ </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".checkin").forEach((checkbox, index) => {
-    const key = "checkin_" + index;
-    checkbox.checked = localStorage.getItem(key) === "true";
-    checkbox.addEventListener("change", function() {
-      localStorage.setItem(key, this.checked);
-    });
-  });
-});
-</script>
-          </div>
-        </li>
-      
-        
-       </ul>
-
-      <div id="social-links">
+        <div id="social-links">
         <a href="https://www.instagram.com/personal_walmir_rezende" target="_blank">
           <ion-icon name="logo-instagram"></ion-icon>
         </a>
@@ -235,6 +218,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     </div>
 
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".checkin").forEach((checkbox, index) => {
+    const key = "checkin_" + index;
+    checkbox.checked = localStorage.getItem(key) === "true";
+    checkbox.addEventListener("change", function() {
+      localStorage.setItem(key, this.checked);
+    });
+  });
+});
+    </script>
     <script
       type="module"
       src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
@@ -302,6 +296,7 @@ document.addEventListener("DOMContentLoaded", () => {
     <script src="./script.js"></script>
   </body>
 </html>
+
 
 
 
