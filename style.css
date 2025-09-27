@@ -15,7 +15,7 @@
   --highlight-color: rgba(255, 255, 255, 0.041);
 }
 
-/* Estilos globais para o corpo da página */
+/* Estilos globais */
 body {
   background: var(--bg-url) no-repeat top center/cover;
   background-attachment: fixed;
@@ -29,7 +29,7 @@ body * {
 }
 
 /* ======================================================= */
-/* ESTILOS PARA A PÁGINA PRINCIPAL (index.html) */
+/* PÁGINA PRINCIPAL (index.html) */
 body.main-page {
   display: flex;
   justify-content: center;
@@ -68,7 +68,7 @@ body.main-page #profile p {
   text-align: center;
 }
 
-/* Botões */
+/* Botões principais */
 body.main-page ul {
   list-style: none;
   display: flex;
@@ -159,13 +159,13 @@ body.main-page ul li a:hover {
   margin-top: 15px;
 }
 
-.hidden-content th {
+/* Conteúdo das tabelas */
+.hidden-content th,
+.hidden-content td {
   border: 1px solid transparent;
   padding: 6px;
-  text-align: center;
+  text-align: left;     /* 👉 alinhado à esquerda */
   color: #333333;
-  background-color: rgba(0, 0, 0, 0.1);
-  font-weight: bold;
   font-size: 0.8rem;
 }
 
@@ -222,21 +222,43 @@ body.main-page footer a {
 /* ============================== */
 /* PLAYER DE VÍDEO DOS EXERCÍCIOS */
 /* ============================== */
+.exercise-name {
+  background: none;
+  border: none;
+  color: #333;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 6px;
+  text-align: left;     /* 👉 alinhado à esquerda */
+  display: block;       /* garante quebra de linha completa */
+  width: 100%;          /* ocupa a célula inteira */
+}
+
+/* Player escondido por padrão */
 .exercise-video {
-  width: 100%;
-  max-width: 560px;
-  aspect-ratio: 16 / 9;
+  position: relative;
+  width: 100%;          /* 👉 agora ocupa toda a largura */
+  max-width: none;      /* 👉 remove limite fixo */
+  aspect-ratio: 16 / 9; /* mantém proporção */
   border-radius: 12px;
   overflow: hidden;
-  margin: 10px auto 20px;
-  display: block;
+  margin: 10px auto;
+  display: none;        /* começa oculto */
   box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
-.exercise-video iframe,
-.exercise-video video {
-  width: 100%;
+.exercise-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;          /* 👉 ocupa toda a célula */
   height: 100%;
   border: none;
-  display: block;
+}
+
+/* Player visível quando ativado */
+.exercise-video.show {
+  display: block;       /* 👉 aparece quando ativado */
 }
