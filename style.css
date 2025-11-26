@@ -8,7 +8,8 @@
 /* Variáveis CSS para cores e URLs */
 :root {
   --text-color: rgb(255, 255, 255);
-  --bg-url: url(./assets/pagina_de_login_academia_mb.jpg); /* Fundo padrão */
+  --bg-url: url(./assets/pagina_de_login_academia_mb.jpg);
+  /* Fundo padrão */
   --stroke-color: rgba(255, 255, 255, 0.1);
   --surface-color: rgba(255, 255, 255, 0.425);
   --surface-color-hover: rgba(0, 0, 0, 0.5);
@@ -106,6 +107,8 @@ body.main-page ul li a:hover {
   -webkit-backdrop-filter: blur(4px);
   font-weight: 500;
   --text-color: rgb(0, 0, 0);
+  margin-bottom: 16px;
+  /* Adicionado margem inferior para separar botões */
 }
 
 .btn-toggle-content:hover {
@@ -129,6 +132,8 @@ body.main-page ul li a:hover {
   transition: opacity 0.5s ease-in-out;
   max-width: 588px;
   width: 100%;
+  margin-bottom: 16px;
+  /* Adicionado margem inferior */
 }
 
 .show-content {
@@ -164,7 +169,8 @@ body.main-page ul li a:hover {
 .hidden-content td {
   border: 1px solid transparent;
   padding: 6px;
-  text-align: left;     /* 👉 alinhado à esquerda */
+  text-align: left;
+  /* 👉 alinhado à esquerda */
   color: #333333;
   font-size: 0.8rem;
 }
@@ -231,34 +237,88 @@ body.main-page footer a {
   cursor: pointer;
   text-decoration: underline;
   margin-bottom: 6px;
-  text-align: left;     /* 👉 alinhado à esquerda */
-  display: block;       /* garante quebra de linha completa */
-  width: 100%;          /* ocupa a célula inteira */
+  text-align: left;
+  /* 👉 alinhado à esquerda */
+  display: block;
+  /* garante quebra de linha completa */
+  width: 100%;
+  /* ocupa a célula inteira */
 }
 
 /* Player escondido por padrão */
 .exercise-video {
   position: relative;
-  width: 100%;          /* 👉 agora ocupa toda a largura */
-  max-width: none;      /* 👉 remove limite fixo */
-  aspect-ratio: 16 / 9; /* mantém proporção */
+  width: 100%;
+  /* 👉 agora ocupa toda a largura */
+  max-width: none;
+  /* 👉 remove limite fixo */
+  aspect-ratio: 16 / 9;
+  /* mantém proporção */
   border-radius: 12px;
   overflow: hidden;
   margin: 10px auto;
-  display: none;        /* começa oculto */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: none;
+  /* começa oculto */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .exercise-video iframe {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;          /* 👉 ocupa toda a célula */
+  width: 100%;
+  /* 👉 ocupa toda a célula */
   height: 100%;
   border: none;
 }
 
 /* Player visível quando ativado */
 .exercise-video.show {
-  display: block;       /* 👉 aparece quando ativado */
+  display: block;
+  /* 👉 aparece quando ativado */
+}
+
+/* ============================== */
+/* DASHBOARDS E ARQUIVOS          */
+/* ============================== */
+.dashboard-container {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload-section {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.file-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.file-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.file-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #555;
+}
+
+.file-name {
+  font-size: 0.9rem;
+  color: #333;
+  word-break: break-all;
 }

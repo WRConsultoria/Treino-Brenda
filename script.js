@@ -59,8 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (video && video.classList.contains("exercise-video")) {
           video.classList.toggle("show");
           console.log(
-            `🎥 Vídeo de '${this.textContent.trim()}' ${
-              video.classList.contains("show") ? "aberto" : "fechado"
+            `🎥 Vídeo de '${this.textContent.trim()}' ${video.classList.contains("show") ? "aberto" : "fechado"
             }.`
           );
         } else {
@@ -125,9 +124,131 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("📌 Lógica de check-in configurada e estados carregados.");
   }
 
+  // ===============================
+  // Dashboards e Upload de Arquivos
+  // ===============================
+  function setupDashboards() {
+    // --- Gráfico de Exames (Exemplo: Colesterol) ---
+    const ctxExames = document.getElementById('examesChart');
+    if (ctxExames) {
+      new Chart(ctxExames, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: 'Colesterol Total',
+            data: [200, 190, 185, 180, 175, 170],
+            borderColor: 'rgba(75, 192, 192, 1)',
+            tension: 0.1
+          },
+          {
+            label: 'Glicose',
+            data: [95, 92, 90, 88, 85, 82],
+            borderColor: 'rgba(255, 99, 132, 1)',
+            tension: 0.1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Evolução de Exames'
+            }
+          }
+        }
+      });
+    }
+
+    // --- Gráfico de Bioimpedância ---
+    const ctxBio = document.getElementById('bioimpedanciaChart');
+    if (ctxBio) {
+      new Chart(ctxBio, {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+          datasets: [{
+            label: '% Gordura Corporal',
+            data: [25, 24, 23, 22, 21, 20],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Massa Muscular (kg)',
+            data: [60, 61, 62, 63, 64, 65],
+            backgroundColor: 'rgba(153, 102, 255, 0.5)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Evolução Bioimpedância'
+            }
+          }
+        }
+      });
+    }
+
+    // --- Upload de Arquivos (Exames) ---
+    const fileInput = document.getElementById('examFileInput');
+    const fileList = document.getElementById('examFileList');
+
+    if (fileInput && fileList) {
+      fileInput.addEventListener('change', function (e) {
+        handleFileUpload(e.target.files, fileList);
+      });
+    }
+
+    // --- Upload de Arquivos (Bioimpedância) ---
+    const bioFileInput = document.getElementById('bioFileInput');
+    const bioFileList = document.getElementById('bioFileList');
+
+    if (bioFileInput && bioFileList) {
+      bioFileInput.addEventListener('change', function (e) {
+        handleFileUpload(e.target.files, bioFileList);
+      });
+    }
+
+    // Função auxiliar para lidar com upload de arquivos
+    function handleFileUpload(files, listElement) {
+      const fileArray = Array.from(files);
+
+      fileArray.forEach(file => {
+        const fileItem = document.createElement('div');
+        fileItem.className = 'file-item';
+
+        let icon = '📄'; // Default icon
+        const ext = file.name.split('.').pop().toLowerCase();
+
+        if (['jpg', 'jpeg', 'png', 'gif'].includes(ext)) icon = '🖼️';
+        else if (ext === 'pdf') icon = '📕';
+        else if (['doc', 'docx'].includes(ext)) icon = '📝';
+
+        fileItem.innerHTML = `
+          <span class="file-icon">${icon}</span>
+          <span class="file-name">${file.name}</span>
+        `;
+
+        listElement.appendChild(fileItem);
+      });
+    }
+  }
+
   // --- Execução das Funções ---
   setupContentToggle();
   setupVideoToggle();
   setupCheckinLogic();
   checkAndReset();
+  setupDashboards();
 });
