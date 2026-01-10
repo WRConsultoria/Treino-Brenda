@@ -1,3 +1,4 @@
 ## Acesse aqui
 
-https://wrconsultoria.github.io/Treino-Brenda/
+https://wrconsultoria.github.io/Treino-Wal/
+

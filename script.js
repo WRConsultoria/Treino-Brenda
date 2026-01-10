@@ -251,4 +251,79 @@ document.addEventListener("DOMContentLoaded", function () {
   setupCheckinLogic();
   checkAndReset();
   setupDashboards();
+
+  // --- PWA Service Worker Registration ---
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker
+      .register("./sw.js")
+      .then((registration) => {
+        console.log("Service Worker registered with scope:", registration.scope);
+      })
+      .catch((error) => {
+        console.error("Service Worker registration failed:", error);
+      });
+  }
+
+  // ===============================
+  // Modal de Ampliação de Imagens
+  // ===============================
+  window.abrirModal = function (imagemSrc) {
+    const modal = document.getElementById("modalImagem");
+    const modalImg = document.getElementById("modalImg");
+    if (modal && modalImg) {
+      modalImg.src = imagemSrc;
+      modal.classList.add("ativo");
+      document.body.style.overflow = "hidden";
+    }
+  };
+
+  window.fecharModal = function (event) {
+    const modal = document.getElementById("modalImagem");
+    if (event && event.target !== modal) return;
+    if (modal) {
+      modal.classList.remove("ativo");
+      document.body.style.overflow = "auto";
+    }
+  };
+
+  // Fechar modal ao clicar na imagem
+  const modal = document.getElementById("modalImagem");
+  if (modal) {
+    modal.addEventListener("click", function (event) {
+      if (event.target === this) {
+        fecharModal();
+      }
+    });
+  }
+
+  // Fechar modal ao pressionar ESC
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      fecharModal();
+    }
+  });
+  
+  // ========== PWA Install Prompt (beforeinstallprompt) ==========
+  let deferredPrompt = null;
+  const btnInstall = document.getElementById('btnInstall');
+
+  window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-info bar from appearing on mobile
+    e.preventDefault();
+    deferredPrompt = e;
+    if (btnInstall) {
+      btnInstall.style.display = 'inline-block';
+    }
+  });
+
+  if (btnInstall) {
+    btnInstall.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('User choice on install prompt:', outcome);
+      deferredPrompt = null;
+      btnInstall.style.display = 'none';
+    });
+  }
 });
