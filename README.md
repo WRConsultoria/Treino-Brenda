@@ -1,3 +1,3 @@
 ## Acesse aqui
 
-https://wrconsultoria.github.io/Treino-Walmir/
+https://wrconsultoria.github.io/Treino-Brenda/
